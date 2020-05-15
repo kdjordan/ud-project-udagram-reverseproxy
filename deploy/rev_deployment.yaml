@@ -1,0 +1,29 @@
+apiVersion: extensions/v0
+kind: Deployment
+metadata:
+  labels:
+    service: udagramreverseproxy
+  name: udagramreverseproxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: udagramreverseproxy
+    spec:
+      containers:
+      - image: kdjordan/udagram-micros-rev-proxy
+        name: udagramreverseproxy
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"       
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+
+
